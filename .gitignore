@@ -1,0 +1,20 @@
+# 生成的亲人 Skill
+relatives/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# 临时文件
+/tmp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
