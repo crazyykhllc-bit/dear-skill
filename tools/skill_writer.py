@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Skill 文件管理器
-列出/管理已生成的亲人 Skill
+列出/管理已生成的亲友 Skill
 """
 
 import argparse
@@ -13,10 +13,10 @@ from pathlib import Path
 
 
 def list_skills(base_dir: str):
-    """列出所有已生成的亲人 Skill"""
+    """列出所有已生成的亲友 Skill"""
     base = Path(base_dir)
     if not base.exists():
-        print("暂无已创建的亲人 Skill")
+        print("暂无已创建的亲友 Skill")
         return
 
     skills = []
@@ -38,10 +38,10 @@ def list_skills(base_dir: str):
             })
 
     if not skills:
-        print("暂无已创建的亲人 Skill")
+        print("暂无已创建的亲友 Skill")
         return
 
-    print(f"共 {len(skills)} 个亲人 Skill：\n")
+    print(f"共 {len(skills)} 个亲友 Skill：\n")
     for s in skills:
         name = s.get('name', s.get('slug', '?'))
         slug = s.get('slug', '?')
@@ -90,7 +90,7 @@ def create_skill_directory(base_dir: str, slug: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Skill 文件管理器（亲人.skill）')
+    parser = argparse.ArgumentParser(description='Skill 文件管理器（亲友.skill）')
     parser.add_argument('--action', required=True, choices=['list', 'create-dir'],
                         help='操作类型')
     parser.add_argument('--base-dir', default='./relatives', help='基础目录')

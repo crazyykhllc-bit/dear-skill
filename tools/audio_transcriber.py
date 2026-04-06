@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 语音/视频转文本工具
-亲人.skill 差异化功能：老人更多使用语音消息，需要转文本并提取说话风格
+亲友.skill 差异化功能：亲人（尤其老人）和朋友都可能发语音消息，需要转文本并提取说话风格
 支持格式：mp3, wav, m4a, amr（微信语音格式）, mp4, mov
 """
 
@@ -231,7 +231,7 @@ def format_results(results: list) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='语音/视频转文本工具（亲人.skill）')
+    parser = argparse.ArgumentParser(description='语音/视频转文本工具（亲友.skill）')
     parser.add_argument('--file', help='单个音频/视频文件路径')
     parser.add_argument('--dir', help='包含音频/视频文件的目录')
     parser.add_argument('--output', default='/tmp/audio_out.txt', help='输出文件路径')

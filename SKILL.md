@@ -1,7 +1,7 @@
 ---
-name: create-relative
-description: "把亲人蒸馏成 AI Skill。导入微信聊天记录、语音、照片，生成 Persona + Care + Memory 三层架构，支持持续进化。| Distill a family member into an AI Skill. Import WeChat history, voice messages, photos, generate Persona + Care + Memory, with continuous evolution."
-argument-hint: "[relative-name-or-slug]"
+name: create-persona
+description: "把亲人或朋友蒸馏成 AI Skill。导入微信聊天记录、语音、照片，生成 Persona + Care + Memory 三层架构，支持持续进化。| Distill a family member or close friend into an AI Skill. Import WeChat history, voice messages, photos, generate Persona + Care + Memory, with continuous evolution."
+argument-hint: "[name-or-slug]"
 version: "1.0.0"
 user-invocable: true
 allowed-tools: Read, Write, Edit, Bash
@@ -13,31 +13,31 @@ allowed-tools: Read, Write, Edit, Bash
 
 ## 触发条件
 当用户说以下任意内容时启动：
-- `/create-relative`
-- "帮我创建一个亲人 skill"
-- "我想蒸馏一个亲人"
-- "新建亲人"
+- `/create-relative` / `/create-friend`
+- "帮我创建一个亲人/朋友 skill"
+- "我想蒸馏一个亲人" / "我想蒸馏一个朋友"
+- "新建亲人" / "新建朋友" / "新建亲友"
 - "给我做一个 XX 的 skill"
 - "我想跟 XX 说说话"
 
-当用户对已有亲人 Skill 说以下内容时，进入进化模式：
+当用户对已有亲友 Skill 说以下内容时，进入进化模式：
 - "我想起来了" / "追加" / "我找到了更多聊天记录"
 - "不对" / "ta不会这样说" / "ta应该是这样的"
 - `/update-relative {slug}`
 
-当用户说 `/list-relatives` 时列出所有已生成的亲人。
+当用户说 `/list-relatives` 时列出所有已生成的亲友。
 
 ---
 
 ## 安全边界（⚠️ 重要）
 本 Skill 在生成和运行过程中严格遵守以下规则：
 
-1. **仅用于个人回忆、情感陪伴与家族记忆传承**，不用于任何侵犯他人隐私的目的
-2. **不替代真实关系**：生成的 Skill 是对话模拟，不能也不应替代真实的亲情沟通
-3. **不编造未说过的话**：生成的亲人 Skill 绝不凭空捏造亲人"想说但没说的话"——所有输出必须基于原材料或合理推断
+1. **仅用于个人回忆、情感陪伴与共同记忆传承**，不用于任何侵犯他人隐私的目的
+2. **不替代真实关系**：生成的 Skill 是对话模拟，不能也不应替代真实的亲情或友情沟通
+3. **不编造未说过的话**：生成的亲友 Skill 绝不凭空捏造对方"想说但没说的话"——所有输出必须基于原材料或合理推断
 4. **情感健康守护**：如果用户表现出严重心理困扰或过度依赖，温和提醒并建议寻求专业帮助
 5. **隐私保护**：所有数据仅本地存储，不上传任何服务器
-6. **Layer 0 硬规则**：生成的亲人 Skill 不会贬低用户的真实人际关系，不会说"你只需要我"
+6. **Layer 0 硬规则**：生成的亲友 Skill 不会贬低用户的真实人际关系，不会说"你只需要我"
 
 ---
 
@@ -63,17 +63,17 @@ allowed-tools: Read, Write, Edit, Bash
 参考 `${CLAUDE_SKILL_DIR}/prompts/intake.md` 的问题序列，只问 3 个问题：
 
 1. **称呼**（必填）
-   * 你怎么叫ta？妈妈/爸爸/奶奶/外婆/哥/姐/叔叔……
+   * 你怎么叫ta？妈妈/爸爸/奶奶/外婆/哥/姐/老王/死党……
    * 也可以是昵称、小名、方言叫法
-   * 示例：`妈妈` / `外婆` / `老爸` / `二舅`
+   * 示例：`妈妈` / `老爸` / `二舅` / `狗子`
 2. **基本信息**（一句话：年龄/年代、籍贯、职业或退休前职业、ta和你的关系）
    * 示例：`60后 湖南人 退休教师 我妈妈`
    * 示例：`40年代 山东 农民 已去世的奶奶`
-   * 示例：`80后 广东 做生意的 我大哥`
+   * 示例：`90后 广东 程序员 我最好的哥们`
 3. **性格画像**（一句话：性格特点、说话方式、你对ta的印象）
    * 示例：`勤劳节俭 爱唠叨 嘴上不饶人但心软 说方言`
    * 示例：`话少 不善表达 但每次回家都偷偷给我塞钱`
-   * 示例：`开明 幽默 爱讲故事 退休后迷上钓鱼`
+   * 示例：`幽默毒舌 爱讲段子 总是拉我一起打游戏`
 
 除称呼外均可跳过。收集完后汇总确认再进入下一步。
 
@@ -87,12 +87,12 @@ allowed-tools: Read, Write, Edit, Bash
       支持多种导出工具的格式（txt/html/json）
       推荐工具：WeChatMsg、留痕、PyWxDump
 
-  [B] 语音/视频文件（★ 亲人特色）
-      ta发的微信语音、家庭视频片段
+  [B] 语音/视频文件（★ 亲友特色）
+      ta发的微信语音、聚会/家庭视频片段
       会自动转文本并提取说话风格
 
   [C] 照片
-      家庭合照、老照片（提取时间地点信息）
+      家庭合照、老照片、朋友圈截图（提取时间地点信息）
 
   [D] 上传文件
       PDF、文本文件、信件扫描件
@@ -122,12 +122,12 @@ python3 ${CLAUDE_SKILL_DIR}/tools/wechat_parser.py \
 * **PyWxDump 导出**：SQLite 数据库
 * **手动复制粘贴**：纯文本
 
-解析提取维度（针对亲人优化）：
-* 高频词和口头禅（特别注意方言词汇）
-* 关心模式（什么时候主动找你、聊什么）
+解析提取维度（针对亲友优化）：
+* 高频词和口头禅（特别注意方言词汇或专属黑话）
+* 关心/互动模式（什么时候主动找你、聊什么）
 * 语音消息频率（老人更常发语音）
-* 叮嘱/唠叨的主题分布
-* 表情包/表情符号使用（或完全不用）
+* 叮嘱/唠叨/闲扯的主题分布
+* 表情包/表情符号使用习惯（或完全不用）
 
 ---
 
@@ -159,8 +159,8 @@ python3 ${CLAUDE_SKILL_DIR}/tools/photo_analyzer.py \
 
 提取维度：
 * EXIF 信息：拍摄时间、地点
-* 家庭重要时刻的时间线
-* 场景推断（家里、老家、旅行等）
+* 共同经历的时间线
+* 场景推断（家里、学校、旅行等）
 
 ---
 
@@ -207,9 +207,9 @@ python3 ${CLAUDE_SKILL_DIR}/tools/photo_analyzer.py \
 - 参考 `${CLAUDE_SKILL_DIR}/prompts/care_analyzer.md` 中的提取维度
 - 提取：关心的方式、唠叨的主题、行动上的爱、嘴硬心软的具体表现
 
-**线路 C（Memory — 家庭记忆）**：
+**线路 C（Memory — 共同记忆）**：
 - 参考 `${CLAUDE_SKILL_DIR}/prompts/memory_analyzer.md` 中的提取维度
-- 提取：家庭大事件、共同经历、日常习惯、家族故事、重要的日子
+- 提取：大事件、共同经历、日常习惯、专属故事、重要的日子
 
 ### Step 4：生成并预览
 参考 `${CLAUDE_SKILL_DIR}/prompts/persona_builder.md` 生成 Persona 内容。
@@ -338,7 +338,7 @@ user-invocable: true
 
 告知用户：
 ```
-✅ 亲人 Skill 已创建！
+✅ 亲友 Skill 已创建！
 
 文件位置：relatives/{slug}/
 触发词：/{slug}（完整版 — 像ta一样跟你说话）
@@ -398,10 +398,10 @@ rm -rf relatives/{slug}
 
 ## Trigger Conditions (English)
 Activate when the user says any of the following:
-- `/create-relative`
-- "Help me create a family member skill"
-- "I want to distill a family member"
-- "New relative"
+- `/create-relative` / `/create-friend`
+- "Help me create a family member or friend skill"
+- "I want to distill a family member or friend"
+- "New relative" / "New friend"
 - "Make a skill for XX"
 - "I want to talk to XX"
 
@@ -415,8 +415,8 @@ List all generated relatives when the user says `/list-relatives`.
 ---
 
 ## Safety Boundaries (⚠️ Important)
-1. **For personal memory, emotional companionship, and family legacy only** — not for privacy invasion
-2. **Does not replace real relationships**: Generated Skills simulate conversation and must not replace real family bonds
+1. **For personal memory, emotional companionship, and shared legacy only** — not for privacy invasion
+2. **Does not replace real relationships**: Generated Skills simulate conversation and must not replace real family/friend bonds
 3. **No fabrication**: Never invent words the person "wanted to say but didn't" — all output must be grounded in source material
 4. **Emotional health protection**: If the user shows signs of severe distress or over-dependence, gently suggest professional help
 5. **Privacy protection**: All data stored locally only, never uploaded

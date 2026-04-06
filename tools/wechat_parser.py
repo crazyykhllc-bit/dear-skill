@@ -2,7 +2,7 @@
 """
 微信聊天记录解析器
 支持 WeChatMsg / 留痕 / PyWxDump 导出格式
-针对亲人场景优化：提取口头禅、方言词汇、语音消息频率、关心模式
+针对亲友场景优化：提取口头禅、方言词汇、语音消息频率、关心/互动模式
 """
 
 import argparse
@@ -128,7 +128,7 @@ def parse_html(file_path: str, target_name: str) -> list:
 
 
 def analyze_messages(messages: list, target_name: str) -> dict:
-    """分析消息，提取亲人特征"""
+    """分析消息，提取亲友特征"""
     target_msgs = [m for m in messages if not target_name or target_name in m.get('sender', '')]
 
     analysis = {
@@ -189,7 +189,7 @@ def analyze_messages(messages: list, target_name: str) -> dict:
 def format_output(messages: list, analysis: dict, target_name: str) -> str:
     """格式化输出"""
     output = []
-    output.append(f"# {target_name or '亲人'} 聊天记录分析\n")
+    output.append(f"# {target_name or '亲友'} 聊天记录分析\n")
     output.append(f"共解析 {analysis['total_messages']} 条消息\n")
 
     if analysis['voice_message_ratio'] > 0:
@@ -226,7 +226,7 @@ def format_output(messages: list, analysis: dict, target_name: str) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='微信聊天记录解析器（亲人.skill）')
+    parser = argparse.ArgumentParser(description='微信聊天记录解析器（亲友.skill）')
     parser.add_argument('--file', required=True, help='聊天记录文件路径')
     parser.add_argument('--target', default='', help='目标人物名称（过滤用）')
     parser.add_argument('--output', default='/tmp/wechat_out.txt', help='输出文件路径')

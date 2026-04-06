@@ -163,7 +163,7 @@ def format_output(analysis: dict) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='照片元信息分析器（亲人.skill）')
+    parser = argparse.ArgumentParser(description='照片元信息分析器（亲友.skill）')
     parser.add_argument('--dir', required=True, help='照片目录')
     parser.add_argument('--output', default='/tmp/photo_out.txt', help='输出文件路径')
 

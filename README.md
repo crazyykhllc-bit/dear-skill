@@ -1,12 +1,12 @@
-# 亲人.skill
+# 亲友.skill
 
-> 把亲人蒸馏成 AI Skill，用ta的方式跟你说话。
+> 把亲人或朋友蒸馏成 AI Skill，用ta的方式跟你说话。
 
 你的妈妈在电话那头永远只关心你"吃了吗"。你的爸爸从不说爱你，但你生病时他比你还急。你的奶奶已经走了，但你还记得她做的红烧肉的味道。
 
-提供亲人的原材料（微信聊天记录、语音消息、照片）加上你的主观描述，生成一个真正像ta的 AI Skill——用ta的口头禅说话，用ta的方式关心你，记得你们一起吃过的饭、走过的路。
+提供亲友的原材料（微信聊天记录、语音消息、照片）加上你的主观描述，生成一个真正像ta的 AI Skill——用ta的口头禅说话，用ta的方式关心你，记得你们一起经历的一切。
 
-⚠️ 本项目仅用于个人回忆、情感陪伴与家族记忆传承。不替代真实亲情，不编造亲人未说过的话。
+⚠️ 本项目仅用于个人回忆、情感陪伴与共同记忆传承。不替代真实亲情友情，不编造对方未说过的话。
 
 [安装](#安装) · [使用](#使用) · [效果示例](#效果示例)
 
@@ -14,7 +14,7 @@
 
 ## 与同类项目的区别
 
-| | 同事.skill | 前任.skill | **亲人.skill** |
+| | 同事.skill | 前任.skill | **亲友.skill** |
 |---|---|---|---|
 | 核心层 | Work + Persona | Memory + Persona | **Persona + Care + Memory** |
 | 独特之处 | 工作能力蒸馏 | 恋爱记忆还原 | **爱的表达方式** |
@@ -28,13 +28,13 @@
 - 情绪反应模式（你报喜时/你诉苦时/你做大决定时）
 - 核心价值观（稳定/节俭/读书/面子……）
 
-**Care（爱的方式）** ← 亲人.skill 独有
+**Care（关心/爱的方式）** ← 亲友.skill 独有
 - ta怎么表达关心（唠叨/行动/沉默）
 - 经典操作（嘴上说不要，你真不带ta就生气）
 - 矛盾之处（嘴硬心软、表面严厉其实最紧张你）
 
-**Memory（家庭记忆）**
-- 家庭大事/日常习惯/节日传统
+**Memory（共同记忆）**
+- 家庭大事/日常习惯/节日传统/朋友间的共同经历
 - 拿手菜/老家模样/常去的地方
 - ta反复讲的故事
 
@@ -48,10 +48,10 @@
 ```bash
 # 安装到当前项目（在 git 仓库根目录执行）
 mkdir -p .claude/skills
-git clone https://github.com/你的用户名/亲人.skill .claude/skills/create-relative
+git clone https://github.com/你的用户名/亲友.skill .claude/skills/create-relative
 
 # 或安装到全局（所有项目都能用）
-git clone https://github.com/你的用户名/亲人.skill ~/.claude/skills/create-relative
+git clone https://github.com/你的用户名/亲友.skill ~/.claude/skills/create-relative
 ```
 
 ### 依赖（可选）
@@ -69,20 +69,20 @@ pip3 install -r requirements.txt
 /create-relative
 ```
 
-按提示输入亲人的称呼、基本信息、性格画像，然后选择数据来源。
+按提示输入亲友的称呼、基本信息、性格画像，然后选择数据来源。
 所有字段均可跳过，仅凭描述也能生成。
 
-完成后用 `/{slug}` 调用该亲人 Skill，开始对话。
+完成后用 `/{slug}` 调用该亲友 Skill，开始对话。
 
 ### 命令一览
 
 | 命令 | 说明 |
 |------|------|
-| `/create-relative` | 创建新的亲人 Skill |
+| `/create-relative` | 创建新的亲友 Skill |
 | `/{slug}` | 跟ta聊天（完整版） |
 | `/{slug}-care` | 关心模式 |
 | `/{slug}-memory` | 回忆模式 |
-| `/list-relatives` | 列出所有亲人 |
+| `/list-relatives` | 列出所有亲友 |
 | `/relative-rollback {slug} {version}` | 回滚版本 |
 | `/delete-relative {slug}` | 删除 |
 
@@ -142,7 +142,7 @@ pip3 install -r requirements.txt
 ## 项目结构
 
 ```
-亲人.skill/
+亲友.skill/
 ├── SKILL.md                   # skill 入口
 ├── prompts/
 │   ├── intake.md              # 信息录入引导
@@ -160,7 +160,7 @@ pip3 install -r requirements.txt
 │   ├── photo_analyzer.py      # 照片元信息分析
 │   ├── skill_writer.py        # Skill 文件管理
 │   └── version_manager.py     # 版本管理
-├── relatives/                 # 生成的亲人 Skill（gitignored）
+├── relatives/                 # 生成的亲友 Skill（gitignored）
 ├── requirements.txt
 ├── LICENSE
 └── README.md
@@ -174,7 +174,7 @@ pip3 install -r requirements.txt
 - **语音消息特别有价值**：老人更常发语音，语音里的方言、语气词、停顿是文字记录无法替代的
 - 建议优先提供：日常唠叨 > 关心你的消息 > 节日问候（最能体现真实性格）
 - 本项目不鼓励对亲情的不健康依赖。如果你发现自己过于沉浸，请寻求专业帮助
-- 你的亲人是一个真实的人。这个 Skill 只是你记忆中的ta
+- 你的亲友是一个真实的人。这个 Skill 只是你记忆中的ta
 
 ---
 
@@ -184,7 +184,7 @@ pip3 install -r requirements.txt
 - [同事.skill](https://github.com/titanwings/colleague-skill)（by titanwings）— 首创"把人蒸馏成 AI Skill"的双层架构
 - [前任.skill](https://github.com/therealXiaomanChu/ex-skill)（by therealXiaomanChu）— 将场景迁移到恋爱关系
 
-亲人.skill 在此基础上新增了 **Care 层**（爱的表达方式），并针对亲人场景优化了数据采集（语音/方言支持）和价值观体系。
+亲友.skill 在此基础上新增了 **Care 层**（关心/爱的表达方式），并针对亲友场景优化了数据采集（语音/方言支持）和价值观体系。
 
 本项目遵循 [AgentSkills](https://agentskills.io) 开放标准，兼容 Claude Code 和 OpenClaw。
 

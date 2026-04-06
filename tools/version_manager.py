@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 版本管理器
-备份和回滚亲人 Skill 的历史版本
+备份和回滚亲友 Skill 的历史版本
 """
 
 import argparse
@@ -116,7 +116,7 @@ def list_versions(base_dir: str, slug: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='版本管理器（亲人.skill）')
+    parser = argparse.ArgumentParser(description='版本管理器（亲友.skill）')
     parser.add_argument('--action', required=True,
                         choices=['backup', 'rollback', 'list'],
                         help='操作类型')
